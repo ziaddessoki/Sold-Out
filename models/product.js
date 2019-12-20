@@ -2,7 +2,7 @@ var orm = require("../config/orm.js");
 
 var products = {
   all: function(cb) {
-    orm.all("", function(res) {
+    orm.all("product", function(res) {
       cb(res);
     });
   },
