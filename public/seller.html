@@ -6,11 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Seller Page</title>
-    <script src="https://code.jquery.com/jquery.js"></script>
+    <script src="http://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+        crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-<script src="./assets/js/product.js"></script>
-    </head>
+    <script src="./assets/js/product.js"></script>
+</head>
 
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -34,28 +35,28 @@
             </ul>
         </div>
     </nav>
-   
-        <form id="addProduct" class="container">
-            <div class="form-group">
-                <label for="exampleFormControlInput1">Please Enter Your Name:</label>
-                <input type="text" class="form-control" id="inputName" placeholder="John Smith" name="sellerName">
-            </div>
-            <div class="form-group">
-                <label for="exampleFormControlInput1">Please Enter Your Phone Number:</label>
-                <input type="number" class="form-control" id="inputPhone" placeholder="2015008888" name="sellerPhone">
-            </div>
-            <div class="form-group">
-                <label for="exampleFormControlInput1">What is the Name of the Item You Would like to Post?</label>
-                <input type="text" class="form-control" id="inputItemName" placeholder="VIZIO TV" name="productName">
-            </div>
-            <div class="form-group">
-                <label for="exampleFormControlTextarea1">Please Give a Discription of the Item:</label>
-                <textarea class="form-control" id="inputDescription"
-                    placeholder="VIZIO - 65 inch Class - M-Series Quantum LED - Smart - 4K UHD (2160p) TV with HDR"
-                    rows="3" name="productDescription"></textarea>
-            </div>
-            <button type="submit">Submit</button>
-        </form>
+
+    <form id="addProduct" class="container">
+        <div class="form-group">
+            <label for="exampleFormControlInput1">Please Enter Your Name:</label>
+            <input type="text" class="form-control" id="inputName" placeholder="John Smith" name="sellerName">
+        </div>
+        <div class="form-group">
+            <label for="exampleFormControlInput1">Please Enter Your Phone Number:</label>
+            <input type="number" class="form-control" id="inputPhone" placeholder="2015008888" name="sellerPhone">
+        </div>
+        <div class="form-group">
+            <label for="exampleFormControlInput1">What is the Name of the Item You Would like to Post?</label>
+            <input type="text" class="form-control" id="inputItemName" placeholder="VIZIO TV" name="productName">
+        </div>
+        <div class="form-group">
+            <label for="exampleFormControlTextarea1">Please Give a Discription of the Item:</label>
+            <textarea class="form-control" id="inputDescription"
+                placeholder="VIZIO - 65 inch Class - M-Series Quantum LED - Smart - 4K UHD (2160p) TV with HDR" rows="3"
+                name="productDescription"></textarea>
+        </div>
+        <button type="submit">Submit</button>
+    </form>
     </div>
 
 </body>
