@@ -45,7 +45,7 @@ router.get("/seller_api", function (req, res) {
     });
   });
   //POST PRODUCTS
-router.post("/products", function(req, res) {
+router.post("/products_api", function(req, res) {
   products.create([
     "product_name", "product_description", "highest_bid", "seller_id", "buyer_id"
   ], [
@@ -56,5 +56,28 @@ router.post("/products", function(req, res) {
     console.log(result)
   });
 });
+// router.post("/buyer_api", function(req, res) {
+//   products.create([
+//     "product_name", "product_description", "highest_bid", "seller_id", "buyer_id"
+//   ], [
+//     req.body.product_name, req.body.product_description, req.body.highest_bid, req.body.seller_id, req.body.buyer_id
+//   ], function(result) {
+//     // Send back the ID of the new quote
+//     res.json({ id: result.insertId });
+//     console.log(result)
+//   });
+// });
+router.post("/seller_api", function(req, res) {
+  sellers.create([
+    "seller_name", "seller_phone", "product_id"
+  ], [
+    req.body.seller_name, req.body.seller_phone, req.body.product_id
+  ], function(result) {
+    // Send back the ID of the new quote
+    res.json({ id: result.insertId });
+    console.log(result)
+  });
+});
+
 module.exports = router;
 
