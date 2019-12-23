@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 ​
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,18 +10,21 @@
         crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
-        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
-        crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
         integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
         crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
         integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
         crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery.js"></script>
+    <script src="./assets/js/product.js"></script>
+    <script src="./assets/js/buyer.js"></script>
+    <link rel="stylesheet" href="./assets/css/buyerStyle.css">
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <title>Buyer Page</title>
 </head>
 ​
+
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <a class="navbar-brand" href="/">AuctionBay</a>
@@ -42,22 +46,11 @@
             </ul>
         </div>
     </nav>
-    <!-- card start -->
-    <div class="card" style="width: 18rem;">
-        <img src="https://zdnet3.cbsistatic.com/hub/i/r/2019/08/05/b2e40423-7c4c-48b5-9c7a-ea7ee92f96fe/thumbnail/770x433/c0942922b4c437cffdac1b9d2b0fd7e6/13-inch-mbpro-header.jpg" class="card-img-top" alt="...">
-        <div class="card-body">
-            <h5 class="card-title">Product Name</h5>
-            <p class="card-text">Product description Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea atque
-                cupiditate blanditiis sed voluptatibus, pariatur explicabo ad laboriosam distinctio quibusdam suscipit
-                aliquid provident impedit! Temporibus incidunt a accusantium consequatur quod?.</p>
-            <h5 class="card-title">Current Bid: 10$</h5>
-            <!-- Button trigger modal -->
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-                BID
-            </button>
-        </div>
+    <!-- card that pull from database -->
+    <div class="row" id="products">
     </div>
     <!-- card end -->
+
     <!-- modal start -->
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
@@ -71,7 +64,7 @@
                 </div>
                 <div class="modal-body">
                     <form name="addBuyer">
-                        <div class="container" >
+                        <div class="container">
                             <div class="form-group">
                                 <label for="exampleFormControlInput1">Name:</label>
                                 <input type="text" class="form-control" id="inputName" placeholder="John Smith">
@@ -96,10 +89,8 @@
         </div>
     </div>
     <!-- modal end -->
+
 </body>
 ​
+
 </html>
-
-
-
-

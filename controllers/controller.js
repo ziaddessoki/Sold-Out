@@ -4,25 +4,21 @@ var router = express.Router();
 
 
 var path = require("path")
-// Import the model (cat.js) to use its database functions.
 var products = require("../models/product");
 var sellers= require("../models/seller");
 var buyers= require("../models/buyer");
 
 // HOME PAGE
 router.get("/", function (req, res) {
-  // res.json({"test":"test"})
   res.sendFile(path.join(__dirname, "/../public/index.html"));
 });
 // SELLER PAGE
 router.get("/seller", function (req, res) {
-  // res.json({"test":"test"})
   console.log("test")
   res.sendFile(path.join(__dirname, "/../public/seller.html"));
 });
 // BUYER PAGE
 router.get("/buyer", function (req, res) {
-  // res.json({"test":"test"})
   console.log("test")
   res.sendFile(path.join(__dirname, "/../public/buyer.html"));
 });
@@ -47,18 +43,31 @@ router.get("/seller_api", function (req, res) {
   //POST PRODUCTS
 router.post("/products_api", function(req, res) {
   products.create([
-    "product_name", "product_description", "highest_bid", "seller_id", "buyer_id"
+    "product_name", "product_description", "product_image","highest_bid", "seller_id", "buyer_id"
   ], [
-    req.body.product_name, req.body.product_description, req.body.highest_bid, req.body.seller_id, req.body.buyer_id
+    req.body.product_name, req.body.product_description, req.body.product_image ,req.body.highest_bid, req.body.seller_id, req.body.buyer_id
+  ], function(result) {
+    // Send back the ID of the new quote
+    // res.json({ id: result.insertId });
+    console.log(result)
+  });
+});
+ //POST buyers
+ router.post("/buyer_api", function(req, res) {
+  console.log("Buyer Post")
+  buyers.create([
+    "buyer_name", "buyer_phone", "product_id"
+  ], [
+    req.body.buyer_name, req.body.buyer_phone, req.body.product_id
   ], function(result) {
     // Send back the ID of the new quote
     res.json({ id: result.insertId });
     console.log(result)
   });
 });
-// router.post("/buyer_api", function(req, res) {
-//   products.create([
-//     "product_name", "product_description", "highest_bid", "seller_id", "buyer_id"
+// router.post("/Product_Update_api", function(req, res) {
+//   product.update([
+//     "buyer_name",  "buyer_phone", "product_id", 
 //   ], [
 //     req.body.product_name, req.body.product_description, req.body.highest_bid, req.body.seller_id, req.body.buyer_id
 //   ], function(result) {
@@ -74,7 +83,7 @@ router.post("/seller_api", function(req, res) {
     req.body.seller_name, req.body.seller_phone, req.body.product_id
   ], function(result) {
     // Send back the ID of the new quote
-    res.json({ id: result.insertId });
+    // res.json({ id: result.insertId });
     console.log(result)
   });
 });
