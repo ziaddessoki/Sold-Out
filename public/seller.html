@@ -39,15 +39,15 @@
     <form id="addProduct" class="container">
         <div class="form-group">
             <label for="exampleFormControlInput1">Please Enter Your Name:</label>
-            <input type="text" class="form-control" id="inputName" placeholder="John Smith" name="sellerName">
+            <input type="text" class="form-control" id="inputName" placeholder="John Smith" name="sellerName" required>
         </div>
         <div class="form-group">
             <label for="exampleFormControlInput1">Please Enter Your Phone Number:</label>
-            <input type="number" class="form-control" id="inputPhone" placeholder="2015008888" name="sellerPhone">
+            <input type="tel" class="form-control" id="inputPhone" placeholder="2015008888" name="sellerPhone" required>
         </div>
         <div class="form-group">
             <label for="exampleFormControlInput1">What is the Name of the Item You Would like to Post?</label>
-            <input type="text" class="form-control" id="inputItemName" placeholder="VIZIO TV" name="productName">
+            <input type="text" class="form-control" id="inputItemName" placeholder="VIZIO TV" name="productName" required>
         </div>
         <div class="form-group">
             <label for="exampleFormControlTextarea1">Please Give a Discription of the Item:</label>
@@ -61,7 +61,7 @@
         </div>
         <div class="form-group">
             <label for="exampleFormControlInput1">Please Enter A Starting Bid:</label>
-            <input type="number" class="form-control" id="inputPhone" placeholder="$25" name="minBid">
+            <input type="number" class="form-control" id="inputPhone" placeholder="$25" name="minBid" required>
         </div>
 
         <button type="submit">Submit</button>

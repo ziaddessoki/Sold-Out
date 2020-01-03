@@ -48,7 +48,7 @@ router.post("/products_api", function(req, res) {
     highest_bid: req.body.highest_bid,
     buyer_name: req.body.buyer_name,
     buyer_phone: req.body.buyer_phone,
-    moment_bid: req.body.moment_bid
+    // moment_bid: req.body.moment_bid
 }, condition, function(result) {
     console.log(result)
   });

@@ -24,9 +24,7 @@ $(document).ready(function () {
             seller_phone: $("#addProduct [name=sellerPhone]")
                 .val()
                 .trim()
-            // posted_since: $("#addProduct [name=sellerPhone]")
-            // .val()
-            // .trim()
+
         };
         // Send the POST request.
         $.ajax("/products_api", {
@@ -36,7 +34,14 @@ $(document).ready(function () {
             contentType: "application/json"
         }).then(function () {
             location.reload();
+
         });
+        $("#addProduct [name=productName] ").val("");
+        $("#addProduct [name=productDescription]").val("");
+        $("#addProduct [name=productImage]").val("");
+        $("#addProduct [name=minBid]").val("");
+        $("#addProduct [name=sellerName]").val("");
+        $("#addProduct [name=sellerPhone]").val("");
         // var newSeller = {
         //     seller_name: $("#addProduct [name=sellerName]")
         //         .val()
@@ -61,39 +66,79 @@ $(document).ready(function () {
         type: "GET"
 
     }).then(function (data) {
-        console.log(data)
+        // console.log(data)
         var product = data.product;
         var len = product.length;
         var products_elem = $("#products");
         for (var i = 0; i < len; i++) {
             // Split timestamp into [ Y, M, D, h, m, s ]
-            var t = product[i].posted_since.split(/[- :]/);
+            // var t = product[i].posted_since.split(/[- :]/);
             // Apply each element to the Date function
             // var d = new Date(Date.UTC(t[0], t[1] - 1, t[2], t[3], t[4], t[5]));
-            console.log(t);
-            products_elem.append(
-                "<div class='col-sm-3'>" +
-                "<div  class='card' style='width: 18rem; height:100%'>" +
-                "<img src=" +
-                product[i].product_image +
-                " class='card-img-top' alt='...'>" +
-                "<div class='card-body'>" +
-                "<h5 class='card-title'>" +
-                "Product Name: " + "</h5>" +
-                product[i].product_name +
-                "<p class='card-text'>" +
-                "Product Description: " +
-                product[i].product_description + "</p>" +
-                "<h5 class='card-title'>" + "Current Bid $" +
-                product[i].highest_bid + "</h5>" +
-                "<p>Posted at: " + product[i].posted_since + "</p>" +
-                "<p>Last Bid at: " + product[i].moment_bid + "</p>" +
-                "<a type='button' id='submitBuyer' class='btn btn-primary text-white' data-toggle='modal' data-target='#exampleModal'" +
-                "data-id=" + product[i].product_id + ">" + "BID" + "</a>" +
-                // "</div>" +
+
+            // // counter   
+
+
+            // console.log(t);
+
+            var card = "<div class='col-sm-3'>" +
+                "<div  class='card' style='width: 18rem; height:100%'>"
+            if (!product[i].product_image) {
+                card += "<img src='https://www.plumbingworld.co.nz/Assets/no_img_medium.gif' height='200px' width='150px' class='card-img-top' alt='...'>"
+            } else {
+                card += "<img src=" + product[i].product_image + " class='card-img-top' alt='...'>"
+            }
+            card += "<div class='card-body'>" +
+                "<h5 class='card-title'>Product Name:" + product[i].product_name + "</h5>" +
+                "<p class='card-text'>Product Description: " + product[i].product_description + "</p>" +
+                "<h5 class='card-title'>" + "Current Bid $" + product[i].highest_bid + "</h5>"
+
+            const options = { weekday: 'short', year: 'numeric', month: 'short', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric' };
+            const posted = new Date(product[i].posted_since);
+            var postedTime = posted.toLocaleDateString('en-US', options);
+
+            card += "<p>Posted at: " + postedTime + "</p>"
+
+            const bided = new Date(product[i].moment_bid);
+            var bidTime = bided.toLocaleDateString('en-US', options);
+
+            card += "<p>Last Bid at: " + bidTime + "</p>"
+
+            card += "<p>Time left to Bid: <h5 class='counter"+ [i] +"'></h5></p>"
+
+            card += "<button type='button'  class='btn btn-primary' id='submitBuyer' data-toggle='modal' data-target='#exampleModal'" + "data-id="+ product[i].product_id + " "+ "data-bid=" + product[i].highest_bid + ">"+"BID"+"</button>"+
+            // card += '<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Bid History</a>' +
+            //     '<div class="dropdown-menu">' +
+            //     '<h>'+product[i].buyer_name+product[i].highest_bid+'</h>' +
+            //     '<h class="dropdown-item" >Another action</h>' +
+            //     '<h class="dropdown-item" >Something else here</h>' +
+            //     '</div>' +
                 "</div>" +
                 "</div>"
-            );
+                ;
+                var countDownDate = new Date(product[i].moment_bid).getTime() + 1000 * 60 * 60;
+                console.log(product[i].moment_bid)
+                var co = $(".counter"+[i]);
+                // Update the count down every 1 second
+                var x = setInterval(function () {
+                    // Get today's date and time
+                    var now = new Date().getTime();
+                    // Find the distance between now and the count down date
+                    var distance = countDownDate - now;
+                    // Time calculations for days, hours, minutes and seconds
+    
+                    var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                    var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+                    $(co).text(minutes + ":" + seconds);
+    
+                    // If the count down is over, write some text 
+                    if (distance < 0) {
+                        clearInterval(x);
+                        $(co).text("EXPIRED");
+                    }
+                }, 1000);
+    
+            products_elem.append(card)
         }
     });
     $("#addProduct").val("");
