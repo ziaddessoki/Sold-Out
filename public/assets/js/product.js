@@ -117,12 +117,12 @@ $(document).ready(function () {
                 "</div>"
                 ;
             setCountDown(product[i].moment_bid, product[i].product_id)
+
             products_elem.append(card)
         }
     });
     $("#addProduct").val("");
 });
-
 function setCountDown(x, y) {
     setInterval(function () {
         var countDownDate = new Date(x).getTime() + 1000 * 60 * 60;
@@ -138,16 +138,40 @@ function setCountDown(x, y) {
         // Time calculations for days, hours, minutes and seconds
         var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
         var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+        console.log(y)
         var co = $("." + y);
         var z = minutes + ":" + seconds
-        console.log(z)
         $(co).html(z);
 
         // If the count down is over, write some text 
         if (distance < 0) {
             // clearInterval(x);
             $(co).text("EXPIRED");
+            distanceExpires(y);
         }
-        
     }, 1000);
 }
+
+function distanceExpires(y){
+    id = y
+    // Send the DELETE request.
+    $.ajax("/products_api/" + y, {
+        type: "DELETE"
+      }).then(function() {
+        console.log("deleted product", id);
+        // Reload the page to get the updated list
+        location.reload();
+      });
+}
+//   $(document).on("click", ".delete-cat", function(event) {
+//     var id = $(this).data("id");
+
+//     // Send the DELETE request.
+//     $.ajax("/cats/" + id, {
+//       type: "DELETE"
+//     }).then(function() {
+//       console.log("deleted cat", id);
+//       // Reload the page to get the updated list
+//       location.reload();
+//     });
+//   });
