@@ -104,42 +104,50 @@ $(document).ready(function () {
 
             card += "<p>Last Bid at: " + bidTime + "</p>"
 
-            card += "<p>Time left to Bid: <h5 class='counter"+ [i] +"'></h5></p>"
+            card += "<p>Time left to Bid: <h5 class=" + product[i].product_id + "></h5></p>"
 
-            card += "<button type='button'  class='btn btn-primary' id='submitBuyer' data-toggle='modal' data-target='#exampleModal'" + "data-id="+ product[i].product_id + " "+ "data-bid=" + product[i].highest_bid + ">"+"BID"+"</button>"+
-            // card += '<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Bid History</a>' +
-            //     '<div class="dropdown-menu">' +
-            //     '<h>'+product[i].buyer_name+product[i].highest_bid+'</h>' +
-            //     '<h class="dropdown-item" >Another action</h>' +
-            //     '<h class="dropdown-item" >Something else here</h>' +
-            //     '</div>' +
+            card += "<button type='button'  class='btn btn-primary' id='submitBuyer' data-toggle='modal' data-target='#exampleModal'" + "data-id=" + product[i].product_id + " " + "data-bid=" + product[i].highest_bid + ">" + "BID" + "</button>" +
+                // card += '<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Bid History</a>' +
+                //     '<div class="dropdown-menu">' +
+                //     '<h>'+product[i].buyer_name+product[i].highest_bid+'</h>' +
+                //     '<h class="dropdown-item" >Another action</h>' +
+                //     '<h class="dropdown-item" >Something else here</h>' +
+                //     '</div>' +
                 "</div>" +
                 "</div>"
                 ;
-                var countDownDate = new Date(product[i].moment_bid).getTime() + 1000 * 60 * 60;
-                console.log(product[i].moment_bid)
-                var co = $(".counter"+[i]);
-                // Update the count down every 1 second
-                var x = setInterval(function () {
-                    // Get today's date and time
-                    var now = new Date().getTime();
-                    // Find the distance between now and the count down date
-                    var distance = countDownDate - now;
-                    // Time calculations for days, hours, minutes and seconds
-    
-                    var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-                    var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-                    $(co).text(minutes + ":" + seconds);
-    
-                    // If the count down is over, write some text 
-                    if (distance < 0) {
-                        clearInterval(x);
-                        $(co).text("EXPIRED");
-                    }
-                }, 1000);
-    
+            setCountDown(product[i].moment_bid, product[i].product_id)
             products_elem.append(card)
         }
     });
     $("#addProduct").val("");
 });
+
+function setCountDown(x, y) {
+    setInterval(function () {
+        var countDownDate = new Date(x).getTime() + 1000 * 60 * 60;
+        // console.log("var countdownDate is " + countDownDate)
+        // Update the count down every 1 second
+
+        // Get today's date and time
+        var now = new Date().getTime();
+        // console.log("var countdownDate after set interval function is " + countDownDate)
+
+        // Find the distance between now and the count down date
+        var distance = countDownDate - now;
+        // Time calculations for days, hours, minutes and seconds
+        var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+        var co = $("." + y);
+        var z = minutes + ":" + seconds
+        console.log(z)
+        $(co).html(z);
+
+        // If the count down is over, write some text 
+        if (distance < 0) {
+            // clearInterval(x);
+            $(co).text("EXPIRED");
+        }
+        
+    }, 1000);
+}
