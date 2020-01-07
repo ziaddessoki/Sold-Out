@@ -23,9 +23,12 @@ $(document).ready(function () {
                 .trim(),
             seller_phone: $("#addProduct [name=sellerPhone]")
                 .val()
+                .trim(),
+            bid_length: $("#addProduct [name=bidLength]")
+                .val()
                 .trim()
-
         };
+        console.log(newProduct)
         // Send the POST request.
         $.ajax("/products_api", {
             type: "POST",
@@ -42,6 +45,7 @@ $(document).ready(function () {
         $("#addProduct [name=minBid]").val("");
         $("#addProduct [name=sellerName]").val("");
         $("#addProduct [name=sellerPhone]").val("");
+        $("#addProduct [name=bidLength]").val("");
         // var newSeller = {
         //     seller_name: $("#addProduct [name=sellerName]")
         //         .val()
@@ -116,16 +120,16 @@ $(document).ready(function () {
                 "</div>" +
                 "</div>"
                 ;
-            setCountDown(product[i].moment_bid, product[i].product_id)
-
+            setCountDown(product[i].moment_bid, product[i].product_id, product[i].bid_length)
+        console.log(product[i].bid_length)
             products_elem.append(card)
         }
     });
     $("#addProduct").val("");
 });
-function setCountDown(x, y) {
+function setCountDown(x, y, q) {
     setInterval(function () {
-        var countDownDate = new Date(x).getTime() + 1000 * 60 * 60;
+        var countDownDate = new Date(x).getTime() + 1000 * 60 * q;
         // console.log("var countdownDate is " + countDownDate)
         // Update the count down every 1 second
 
@@ -138,7 +142,6 @@ function setCountDown(x, y) {
         // Time calculations for days, hours, minutes and seconds
         var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
         var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-        console.log(y)
         var co = $("." + y);
         var z = minutes + ":" + seconds
         $(co).html(z);
@@ -153,7 +156,7 @@ function setCountDown(x, y) {
 }
 
 function distanceExpires(y){
-    id = y
+    
     // Send the DELETE request.
     $.ajax("/products_api/" + y, {
         type: "DELETE"
@@ -163,15 +166,3 @@ function distanceExpires(y){
         location.reload();
       });
 }
-//   $(document).on("click", ".delete-cat", function(event) {
-//     var id = $(this).data("id");
-
-//     // Send the DELETE request.
-//     $.ajax("/cats/" + id, {
-//       type: "DELETE"
-//     }).then(function() {
-//       console.log("deleted cat", id);
-//       // Reload the page to get the updated list
-//       location.reload();
-//     });
-//   });

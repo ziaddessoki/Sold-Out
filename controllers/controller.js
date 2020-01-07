@@ -28,10 +28,11 @@ router.get("/products_api", function (req, res) {
 });
   //POST PRODUCTS
 router.post("/products_api", function(req, res) {
+  console.log(req.body)
   products.create([
-    "product_name", "product_description", "product_image","highest_bid", "seller_name", "seller_phone"
+    "product_name", "product_description", "product_image","highest_bid", "seller_name", "seller_phone", "bid_length"
   ], [
-    req.body.product_name, req.body.product_description, req.body.product_image ,req.body.highest_bid, req.body.seller_name, req.body.seller_phone
+    req.body.product_name, req.body.product_description, req.body.product_image ,req.body.highest_bid, req.body.seller_name, req.body.seller_phone, req.body.bid_length
   ], function(result) {
     // Send back the ID of the new quote
     // res.json({ id: result.insertId });
