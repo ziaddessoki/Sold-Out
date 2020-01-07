@@ -1,0 +1,21 @@
+#soldLogo {
+    height: 50px;
+    padding-left: 12%;
+
+}
+#navbarNav{
+    position: fixed;
+    right: 15%;
+}
+.carousel-item{
+    height: 250px;
+    width: 100%;
+    padding-right: 15%;
+    padding-left: 15%;
+    background-color: lightgray;
+
+}
+#navigationBar{
+    padding-top: 0px;
+    padding-bottom: 0px;
+}
