@@ -39,6 +39,26 @@ router.post("/products_api", function(req, res) {
     console.log(result)
   });
 });
+//Twilio
+router.post("/send_sms", function(req, res){
+  console.log(req.body.seller_phone)
+          // twilio api 
+        // var twilio = require('twilio');
+        // console.log("seller phone ="+newProduct.seller_phone)
+        const accountSid = 'AC290f13a79685d52e994487b6f26d295a';
+        const authToken = 'af747a82a522f6278cdf9a2a0d0776f8';
+        var twilio = require('twilio');
+        var client = new twilio (accountSid, authToken);
+        client.messages
+            .create({
+                body: 'Its working!',
+                from: '+12012672107',
+                to: '+1' + req.body.seller_phone
+            })
+            .then(message => res.json(message));
+        //   twilio api
+});
+
  //POST buyers
  router.put("/products_api/:id", function(req, res) {
   console.log("Buyer Update")

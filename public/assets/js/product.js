@@ -30,41 +30,59 @@ $(document).ready(function () {
         };
         console.log(newProduct)
         // Send the POST request.
+        $.ajax("/send_sms", {
+            type: "POST",
+            data: newProduct.seller_phone,
+            dataType: "json",
+            contentType: "application/json"
+        }).then(function (data) {
+            console.log(data)
+            $("#addProduct [name=productName] ").val("");
+            $("#addProduct [name=productDescription]").val("");
+            $("#addProduct [name=productImage]").val("");
+            $("#addProduct [name=minBid]").val("");
+            $("#addProduct [name=sellerName]").val("");
+            $("#addProduct [name=sellerPhone]").val("");
+            $("#addProduct [name=bidLength]").val("");
+            // location.reload();
+        })
         $.ajax("/products_api", {
             type: "POST",
             data: JSON.stringify(newProduct),
             dataType: "json",
             contentType: "application/json"
         }).then(function () {
-            location.reload();
+            console.log('Send SMS')
+            // $.ajax("/send_sms", {
+            //     type: "POST",
+            //     data: newProduct.seller_phone,
+            //     dataType: "json",
+            //     contentType: "application/json"
+            // }).then(function (data) {
+            //     $("#addProduct [name=productName] ").val("");
+            //     $("#addProduct [name=productDescription]").val("");
+            //     $("#addProduct [name=productImage]").val("");
+            //     $("#addProduct [name=minBid]").val("");
+            //     $("#addProduct [name=sellerName]").val("");
+            //     $("#addProduct [name=sellerPhone]").val("");
+            //     $("#addProduct [name=bidLength]").val("");
+                // location.reload();
+            })
+            // location.reload();
 
         });
-        $("#addProduct [name=productName] ").val("");
-        $("#addProduct [name=productDescription]").val("");
-        $("#addProduct [name=productImage]").val("");
-        $("#addProduct [name=minBid]").val("");
-        $("#addProduct [name=sellerName]").val("");
-        $("#addProduct [name=sellerPhone]").val("");
-        $("#addProduct [name=bidLength]").val("");
-        // var newSeller = {
-        //     seller_name: $("#addProduct [name=sellerName]")
-        //         .val()
-        //         .trim(),
-        //     seller_phone: $("#addProduct [name=sellerPhone]")
-        //         .val()
-        //         .trim()
-        // };
-        // $.ajax("/seller_api", {
-        //     type: "POST",
-        //     data: JSON.stringify(newSeller),
-        //     dataType: "json",
-        //     contentType: "application/json"
-        // }).then(function () {
-        //     console.log("created new seller");
-        //     // Reload the page to get the updated list
-        //     location.reload();
-        // });
-    });
+        // $("#addProduct [name=productName] ").val("");
+        // $("#addProduct [name=productDescription]").val("");
+        // $("#addProduct [name=productImage]").val("");
+        // $("#addProduct [name=minBid]").val("");
+        // $("#addProduct [name=sellerName]").val("");
+        // $("#addProduct [name=sellerPhone]").val("");
+        // $("#addProduct [name=bidLength]").val("");
+      
+    
+    })
+
+    // });
 
     $.ajax("/products_api", {
         type: "GET"
@@ -126,7 +144,7 @@ $(document).ready(function () {
         }
     });
     $("#addProduct").val("");
-});
+
 function setCountDown(x, y, q) {
     setInterval(function () {
         var countDownDate = new Date(x).getTime() + 1000 * 60 * q;
