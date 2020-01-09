@@ -5,6 +5,9 @@ var router = express.Router();
 
 var path = require("path")
 var products = require("../models/product");
+var dotenv = require('dotenv');
+
+dotenv.config({path: '.env'});
 
 // HOME PAGE
 router.get("/", function (req, res) {
@@ -45,8 +48,9 @@ router.post("/send_sms", function(req, res){
           // twilio api 
         // var twilio = require('twilio');
         // console.log("seller phone ="+newProduct.seller_phone)
-        const accountSid = 'AC290f13a79685d52e994487b6f26d295a';
-        const authToken = 'af747a82a522f6278cdf9a2a0d0776f8';
+        console.log(process.env.TWILIO_ACCOUNT_SID)
+        const accountSid = process.env.TWILIO_ACCOUNT_SID;
+        const authToken = process.env.TWILIO_AUTH_TOKEN;
         var twilio = require('twilio');
         var client = new twilio (accountSid, authToken);
         client.messages
