@@ -1,14 +1,14 @@
 var express = require("express");
-
 var router = express.Router();
-
-
 var path = require("path")
 var products = require("../models/product");
 var dotenv = require('dotenv');
-
+var twilio = require('twilio');
 dotenv.config({path: '.env'});
-
+//twilio
+const accountSid = process.env.TWILIO_ACCOUNT_SID;
+const authToken = process.env.TWILIO_AUTH_TOKEN;
+const twilioClient = new twilio (accountSid, authToken);
 // HOME PAGE
 router.get("/", function (req, res) {
   res.sendFile(path.join(__dirname, "/../public/index.html"));
@@ -31,6 +31,7 @@ router.get("/products_api", function (req, res) {
 });
   //POST PRODUCTS
 router.post("/products_api", function(req, res) {
+  console.log("Products Api")
   console.log(req.body)
   products.create([
     "product_name", "product_description", "product_image","highest_bid", "seller_name", "seller_phone", "bid_length"
@@ -39,7 +40,14 @@ router.post("/products_api", function(req, res) {
   ], function(result) {
     // Send back the ID of the new quote
     // res.json({ id: result.insertId });
-    console.log(result)
+    twilioClient.messages
+    .create({
+        body: `Hi \nThank you for posting ${req.body.product_name}`,
+        from: '+12012672107',
+        to: `+1${req.body.seller_phone}`
+    })
+    .then(message => console.log(message));
+    
   });
 });
 //Twilio
@@ -49,17 +57,8 @@ router.post("/send_sms", function(req, res){
         // var twilio = require('twilio');
         // console.log("seller phone ="+newProduct.seller_phone)
         console.log(process.env.TWILIO_ACCOUNT_SID)
-        const accountSid = process.env.TWILIO_ACCOUNT_SID;
-        const authToken = process.env.TWILIO_AUTH_TOKEN;
-        var twilio = require('twilio');
-        var client = new twilio (accountSid, authToken);
-        client.messages
-            .create({
-                body: 'Its working!',
-                from: '+12012672107',
-                to: '+1' + req.body.seller_phone
-            })
-            .then(message => res.json(message));
+       
+        
         //   twilio api
 });
 
