@@ -28,44 +28,45 @@ $(document).ready(function () {
                 .val()
                 .trim()
         };
-        console.log(newProduct)
-        // Send the POST request.
-        $.ajax("/send_sms", {
-            type: "POST",
-            data: newProduct.seller_phone,
-            dataType: "json",
-            contentType: "application/json"
-        }).then(function (data) {
-            console.log(data)
-            $("#addProduct [name=productName] ").val("");
-            $("#addProduct [name=productDescription]").val("");
-            $("#addProduct [name=productImage]").val("");
-            $("#addProduct [name=minBid]").val("");
-            $("#addProduct [name=sellerName]").val("");
-            $("#addProduct [name=sellerPhone]").val("");
-            $("#addProduct [name=bidLength]").val("");
-            // location.reload();
-        })
+        // console.log(newProduct)
+        // // Send the POST request.
+        // $.ajax("/send_sms", {
+        //     type: "POST",
+        //     data: newProduct.seller_phone,
+        //     dataType: "json",
+        //     contentType: "application/json"
+        // }).then(function (data) {
+           
+        //     $("#addProduct [name=productName] ").val("");
+        //     $("#addProduct [name=productDescription]").val("");
+        //     $("#addProduct [name=productImage]").val("");
+        //     $("#addProduct [name=minBid]").val("");
+        //     $("#addProduct [name=sellerName]").val("");
+        //     $("#addProduct [name=sellerPhone]").val("");
+        //     $("#addProduct [name=bidLength]").val("");
+        //     // location.reload();
+        // })
         $.ajax("/products_api", {
             type: "POST",
             data: JSON.stringify(newProduct),
             dataType: "json",
             contentType: "application/json"
-        }).then(function () {
+        }).then(function (data) {
             console.log('Send SMS')
-            // $.ajax("/send_sms", {
-            //     type: "POST",
-            //     data: newProduct.seller_phone,
-            //     dataType: "json",
-            //     contentType: "application/json"
-            // }).then(function (data) {
-            //     $("#addProduct [name=productName] ").val("");
-            //     $("#addProduct [name=productDescription]").val("");
-            //     $("#addProduct [name=productImage]").val("");
-            //     $("#addProduct [name=minBid]").val("");
-            //     $("#addProduct [name=sellerName]").val("");
-            //     $("#addProduct [name=sellerPhone]").val("");
-            //     $("#addProduct [name=bidLength]").val("");
+            $.ajax("/send_sms", {
+                type: "POST",
+                data: newProduct.seller_phone,
+                dataType: "json",
+                contentType: "application/json"
+            }).then(function (data) {
+                console.log(data)
+                $("#addProduct [name=productName] ").val("");
+                $("#addProduct [name=productDescription]").val("");
+                $("#addProduct [name=productImage]").val("");
+                $("#addProduct [name=minBid]").val("");
+                $("#addProduct [name=sellerName]").val("");
+                $("#addProduct [name=sellerPhone]").val("");
+                $("#addProduct [name=bidLength]").val("");
                 // location.reload();
             })
             // location.reload();
@@ -158,25 +159,29 @@ function setCountDown(x, y, q) {
         // Find the distance between now and the count down date
         var distance = countDownDate - now;
         // Time calculations for days, hours, minutes and seconds
+        var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
         var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
         var seconds = Math.floor((distance % (1000 * 60)) / 1000);
         var co = $("." + y);
-        var z = minutes + ":" + seconds
+        var z = hours + ":" + minutes + ":" + seconds
+        console.log(z)
         $(co).html(z);
-
         // If the count down is over, write some text 
         if (distance < 0) {
             // clearInterval(x);
             $(co).text("EXPIRED");
-            distanceExpires(y);
+            setTimeout(function() {
+                distanceExpires(y);
+            }, 4000)
         }
     }, 1000);
 }
 
 function distanceExpires(y){
+    var id=y;
     
     // Send the DELETE request.
-    $.ajax("/products_api/" + y, {
+    $.ajax("/products_api/" + id, {
         type: "DELETE"
       }).then(function() {
         console.log("deleted product", id);
@@ -184,3 +189,5 @@ function distanceExpires(y){
         location.reload();
       });
 }
+
+})
