@@ -42,7 +42,7 @@ router.post("/products_api", function (req, res) {
       // res.json({ id: result.insertId });
       twilioClient.messages
         .create({
-          body: `Hi \nThank you for posting ${req.body.product_name}`,
+          body: `Hi ${req.body.seller_name}!\nThank you for posting ${req.body.product_name}, if a bid is placed you will be notified.`,
           from: '+12012672107',
           to: `+1${req.body.seller_phone}`
         })
@@ -76,7 +76,7 @@ router.put("/products_api/:id", function (req, res) {
   }, condition, function (result) {
     twilioClient.messages
       .create({
-        body: `Hi ${req.body.buyer_name}, \nThank you for your bid!`,
+        body: `Hi ${req.body.buyer_name}, \nThank you for placing a bid of $${req.body.highest_bid}!`,
         from: '+12012672107',
         to: `+1${req.body.buyer_phone}`
       })
@@ -91,7 +91,7 @@ router.put("/products_api/:id", function (req, res) {
             if (aProduct.product_id == req.params.id) {
               twilioClient.messages
                 .create({
-                  body: `Hi ${aProduct.seller_name}, \n ${req.body.buyer_name} placed a bid on ${aProduct.product_name}!`,
+                  body: `Hi ${aProduct.seller_name}, \n${req.body.buyer_name} placed a bid of $${req.body.highest_bid} on ${aProduct.product_name}!`,
                   from: '+12012672107',
                   to: `+1${aProduct.seller_phone}`
                 }).then(message =>{
@@ -107,9 +107,39 @@ router.put("/products_api/:id", function (req, res) {
 });
 
 router.delete("/products_api/:id", function (req, res) {
+  console.log("Product SOLD OUT!!!!")
   var condition = "product_id = " + req.params.id;
 
   products.delete(condition, function (result) {
+    console.log("message should send now")
+    console.log(req.body.buyer_phone)
+    twilioClient.messages
+    .create({
+      body: `Congrats ${req.body.buyer_name}! \n You had the highest bid! `,
+      from: '+12012672107',
+      to: `+1${req.body.buyer_phone}`
+    }).then(message => {
+      
+      products.all(function (data) {
+        console.log(data)
+        const products = data;
+        for (let index = 0; index < products.length; index++) {
+          const aProduct = products[index];
+          console.log(aProduct)
+          console.log(req.params.id)
+          if (aProduct.product_id == req.params.id) {
+            twilioClient.messages
+              .create({
+                body: `Hi ${aProduct.seller_name}, \n ${req.body.buyer_name} bought ${aProduct.product_name}!`,
+                from: '+12012672107',
+                to: `+1${aProduct.seller_phone}`
+              }).then(message =>{
+                console.log(message)
+              })
+          }
+        }
+      });
+    });
     if (result.affectedRows == 0) {
       // If no rows were changed, then the ID must not exist, so 404
       return res.status(404).end();
