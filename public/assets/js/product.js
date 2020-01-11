@@ -52,6 +52,7 @@ $(document).ready(function () {
             dataType: "json",
             contentType: "application/json"
         }).then(function (data) {
+            
             console.log('Send SMS')
             $.ajax("/send_sms", {
                 type: "POST",
@@ -60,30 +61,24 @@ $(document).ready(function () {
                 contentType: "application/json"
             }).then(function (data) {
                 console.log(data)
-                $("#addProduct [name=productName] ").val("");
-                $("#addProduct [name=productDescription]").val("");
-                $("#addProduct [name=productImage]").val("");
-                $("#addProduct [name=minBid]").val("");
-                $("#addProduct [name=sellerName]").val("");
-                $("#addProduct [name=sellerPhone]").val("");
-                $("#addProduct [name=bidLength]").val("");
-                // location.reload();
+              
+                
             })
             // location.reload();
 
         });
-        // $("#addProduct [name=productName] ").val("");
-        // $("#addProduct [name=productDescription]").val("");
-        // $("#addProduct [name=productImage]").val("");
-        // $("#addProduct [name=minBid]").val("");
-        // $("#addProduct [name=sellerName]").val("");
-        // $("#addProduct [name=sellerPhone]").val("");
-        // $("#addProduct [name=bidLength]").val("");
+        $("#addProduct [name=productName] ").val("");
+        $("#addProduct [name=productDescription]").val("");
+        $("#addProduct [name=productImage]").val("");
+        $("#addProduct [name=minBid]").val("");
+        $("#addProduct [name=sellerName]").val("");
+        $("#addProduct [name=sellerPhone]").val("");
+        $("#addProduct [name=bidLength]").val("");
       
     
     })
 
-    // });
+    
 
     $.ajax("/products_api", {
         type: "GET"
@@ -111,7 +106,7 @@ $(document).ready(function () {
             } else {
                 card += "<img src=" + product[i].product_image + " class='card-img-top' alt='...'>"
             }
-            card += "<div class='card-body'>" +
+            card += "<div class='card-body'   id='"+ product[i].product_id +"'  >" +
                 "<h5 class='card-title'>Product Name:" + product[i].product_name + "</h5>" +
                 "<p class='card-text'>Product Description: " + product[i].product_description + "</p>" +
                 "<h5 class='card-title'>" + "Current Bid $" + product[i].highest_bid + "</h5>"
@@ -167,6 +162,13 @@ function setCountDown(x, y, q) {
         console.log(z)
         $(co).html(z);
         // If the count down is over, write some text 
+        if (distance < 1000 *30) {
+            var cardId = $("#" + y);
+            $(cardId).addClass("backgroundRed")
+            var cardBtn = $('[data-id='+ y +']')
+            $(cardBtn).removeClass('btn-primary').addClass('btn-danger');
+        }
+
         if (distance < 0) {
             // clearInterval(x);
             $(co).text("EXPIRED");
@@ -182,7 +184,10 @@ function distanceExpires(y){
     
     // Send the DELETE request.
     $.ajax("/products_api/" + id, {
-        type: "DELETE"
+        type: "DELETE",
+        //   data: JSON.stringify(newProduct),
+        //     dataType: "json",
+        //     contentType: "application/json"
       }).then(function() {
         console.log("deleted product", id);
         // Reload the page to get the updated list

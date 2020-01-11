@@ -6,12 +6,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Seller Page</title>
-<!-- added to get dropdown working -->
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-<!-- drop down script link end -->
+    <!-- css reset -->
+    <link rel="stylesheet" href="../public/assets/css/reset.css">
+    <!-- added to get dropdown working -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+    <!-- drop down script link end -->
     <script src="http://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
         crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
@@ -42,46 +51,48 @@
         </div>
     </nav>
     <form id="addProduct" class="container">
-        <div class="form-group">
-            <label for="exampleFormControlInput1">Please Enter Your Name:</label>
-            <input type="text" class="form-control" id="inputName" placeholder="John Smith" name="sellerName" required>
-        </div>
-        <div class="form-group">
-            <label for="exampleFormControlInput1">Please Enter Your Phone Number:</label>
-            <input type="tel" class="form-control" id="inputPhone" placeholder="2015008888" name="sellerPhone" required>
-        </div>
-        <div class="form-group">
-            <label for="exampleFormControlInput1">What is the Name of the Item You Would like to Post?</label>
-            <input type="text" class="form-control" id="inputItemName" placeholder="VIZIO TV" name="productName" required>
-        </div>
-        <div class="form-group">
-            <label for="exampleFormControlTextarea1">Please Give a Discription of the Item:</label>
-            <textarea class="form-control" id="inputDescription"
-                placeholder="VIZIO - 65 inch Class - M-Series Quantum LED - Smart - 4K UHD (2160p) TV with HDR" rows="3"
-                name="productDescription"></textarea>
-        </div>
-        <div class="form-group">
-            <label for="exampleFormControlInput1">Please Provide URL Image of your product:</label>
-            <input type="text" class="form-control" id="inputItemName" placeholder="URL HERE" name="productImage">
-        </div>
-        <div class="form-group">
-            <label for="exampleFormControlInput1">Please Enter A Starting Bid:</label>
-            <input type="number" class="form-control" id="inputPhone" placeholder="$25" name="minBid" required>
-        </div>
-        <div class="form-group">
-            <label for="exampleFormControlInput1">Length of bid availble in minutes:</label>
-            <input type="number" class="form-control" id="inputPhone" placeholder="20" name="bidLength" required>
-            <select aria-placeholder="mins.">
-                <option value="15">15</option>
-                <option value="30">30</option>
-                <option value="45">45</option>
-                <option value="60" selected>60</option>
-              </select>        
-        </div>
-        
-        <button type="submit">Submit</button>
+        <div class="row">
+            <div class="col-sm-6">
+                <label for="exampleFormControlInput1">Please Enter Your Name:</label>
+                <input type="text" class="form-control" id="inputName" placeholder="John Smith" name="sellerName"
+                    required>
+            </div>
+            <div class="col-sm-6">
+                <label for="exampleFormControlInput1">Please Enter A Starting Bid:</label>
+                <input type="number" class="form-control" id="inputPhone" placeholder="$25" name="minBid" required>
+            </div>
+
+
+            <div class="col-sm-6">
+                <label for="exampleFormControlInput1">Please Enter Your Phone Number:</label>
+                <input type="tel" class="form-control" id="inputPhone" placeholder="2015008888" name="sellerPhone"
+                    required>
+            </div>
+            <div class="col-sm-6">
+                <label for="exampleFormControlInput1">Please Provide URL Image of your product:</label>
+                <input type="text" class="form-control" id="inputItemName" placeholder="URL HERE" name="productImage">
+            </div>
+
+            <div class="col-sm-6">
+                <label for="exampleFormControlInput1">What is the Name of the Item You Would like to Post?</label>
+                <input type="text" class="form-control" id="inputItemName" placeholder="VIZIO TV" name="productName"
+                    required>
+            </div>
+            <div class="col-sm-6">
+                <label for="exampleFormControlInput1">Length of bid availble in minutes:</label>
+                <input type="number" class="form-control" id="inputPhone" placeholder="20" name="bidLength" required>
+
+            </div>
+            <div class="col-sm-12">
+                <label for="exampleFormControlTextarea1">Please Give a Discription of the Item:</label>
+                <textarea class="form-control" id="inputDescription"
+                    placeholder="VIZIO - 65 inch Class - M-Series Quantum LED - Smart - 4K UHD (2160p) TV with HDR"
+                    rows="3" name="productDescription"></textarea>
+            </div>
+
+            <button type="submit">Submit</button>
     </form>
-    
+
     </div>
 
 </body>
