@@ -142,7 +142,7 @@ function setCountDown(x, y, q) {
         var seconds = Math.floor((distance % (1000 * 60)) / 1000);
         var co = $("." + y);
         var z = hours + ":" + minutes + ":" + seconds
-        console.log(z)
+        
         $(co).html(z);
         // If the count down is over, write some text 
         if (distance < 1000 *30) {
