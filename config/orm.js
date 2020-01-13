@@ -50,6 +50,15 @@ var orm = {
       cb(result);
     });
   },
+  find: function(tableInput, productId, cb) {
+    var queryString = `SELECT * FROM  ${tableInput} WHERE product_id ="${productId}" ;`
+    connection.query(queryString, function(err, result) {
+      if (err) {
+        throw err;
+      }
+      cb(result);
+    });
+  },
   create: function(table, cols, vals, cb) {
     var queryString = "INSERT INTO " + table;
 
