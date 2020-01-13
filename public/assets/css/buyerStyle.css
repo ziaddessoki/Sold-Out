@@ -1,21 +1,102 @@
+body{
+    background-image: url(../image/background.jpg);
+}
 #soldLogo {
     height: 50px;
-    padding-left: 12%;
+    /* padding-left: 12%; */
 
 }
 #navbarNav{
-    position: fixed;
-    right: 15%;
+/* float: right; */
 }
 .carousel-item{
-    height: 250px;
     width: 100%;
-    padding-right: 15%;
-    padding-left: 15%;
+    padding-right: 5%;
+    padding-left: 5%;
     background-color: lightgray;
 
 }
 #navigationBar{
     padding-top: 0px;
     padding-bottom: 0px;
+}
+#products{
+    padding-left: 5%;
+    padding-left: 5%;
+
+}
+.d-block{
+    height: 400px;
+}
+.jumbotron{
+    /* margin-top: 5%; */
+    margin-left: 5%;
+    margin-right: 5%;
+    background-color: white;
+}
+.display-4{
+    text-align: center;
+}
+#leadP{
+    text-align: center;
+}
+/* .grid-container {
+    display: grid;
+    grid-template-columns: auto auto;
+    padding: 10px;
+  } */
+  .item1 { grid-area: sell; }
+  .item2 { grid-area: bigpic; }
+  .item3 { grid-area: pic1; }
+  .item4 { grid-area: main1; }
+  .item5 { grid-area: pic2; }
+  .item6 { grid-area: main2; }
+  .item7 { grid-area: pic3; }
+  .item8 { grid-area: main3; }
+  .item9 { grid-area: pic4;}
+  .item10 {grid-area: main4;}
+
+.grid-container {
+    display: grid;
+    grid-template-areas:
+      'sell sell sell sell bigpic bigpic bigpic bigpic'
+      'pic1 main1 main1 main1 bigpic bigpic bigpic bigpic'
+      'pic2 main2 main2 main2 bigpic bigpic bigpic bigpic'
+      'pic3 main3 main3 main3 bigpic bigpic bigpic bigpic'
+      'pic4 main4 main4 main4 bigpic bigpic bigpic bigpic';
+    padding: 10px;
+  }
+  .grid-container2 {
+    display: grid;
+    grid-template-areas:
+      'bigpic bigpic bigpic bigpic sell sell sell sell'
+      'bigpic bigpic bigpic bigpic pic1 main1 main1 main1'
+      'bigpic bigpic bigpic bigpic pic2 main2 main2 main2'
+      'bigpic bigpic bigpic bigpic pic3 main3 main3 main3'
+      'bigpic bigpic bigpic bigpic pic4 main4 main4 main4';
+    padding: 10px;
+    grid-gap: 10px;
+  }
+
+#sellerInstructions{
+    height: 50px;
+}
+#pin{
+    height: 100px;
+}
+.newSize{
+    font-size: smaller;
+}
+.footer {
+    /* position: fixed; */
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: white;
+    color: gray;
+    text-align: center;
+    font-size: smaller;
+  }
+#addProduct{
+    background-color: white;
 }
