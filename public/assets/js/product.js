@@ -82,8 +82,8 @@ $(document).ready(function () {
 
             // console.log(t);
 
-            var card = "<div class='col-sm-3'>" +
-                "<div  class='card' style='width: 18rem; height:100%'>"
+            // var card = "<div class='col-sm-3'>" +
+            var card = "<div  class='card' style='width: 18rem; height:100%'>"
             if (!product[i].product_image) {
                 card += "<img src='https://www.plumbingworld.co.nz/Assets/no_img_medium.gif' height='200px' width='150px' class='card-img-top' alt='...'>"
             } else {
@@ -114,7 +114,7 @@ $(document).ready(function () {
                 //     '<h class="dropdown-item" >Another action</h>' +
                 //     '<h class="dropdown-item" >Something else here</h>' +
                 //     '</div>' +
-                "</div>" +
+                // "</div>" +
                 "</div>"
                 ;
             setCountDown(product[i].moment_bid, product[i].product_id, product[i].bid_length)
@@ -166,7 +166,7 @@ function distanceExpires(y){
     var id=y;
     
     // Send the DELETE request.
-    $.ajax("/products_api/" + id, {
+    $.ajax("/test_products_api/" + id, {
         type: "DELETE",
         //   data: JSON.stringify(newProduct),
         //     dataType: "json",
