@@ -10,6 +10,10 @@ const accountSid = process.env.TWILIO_ACCOUNT_SID;
 const authToken = process.env.TWILIO_AUTH_TOKEN;
 const twilioClient = new twilio(accountSid, authToken);
 // HOME PAGE
+
+var app = express()
+app.use('/static', express.static(path.join(__dirname, '/../public')))
+
 router.get("/", function (req, res) {
   res.sendFile(path.join(__dirname, "/../public/index.html"));
 });
