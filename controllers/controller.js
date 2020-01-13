@@ -106,48 +106,79 @@ router.put("/products_api/:id", function (req, res) {
   });
 });
 
-router.delete("/products_api/:id", function (req, res) {
-  console.log("Product SOLD OUT!!!!")
-  var condition = "product_id = " + req.params.id;
+// router.delete("/products_api/:id", function (req, res) {
+//   console.log("Product SOLD OUT!!!!")
+//   var condition = "product_id = " + req.params.id;
 
-  products.delete(condition, function (result) {
-    console.log("message should send now")
-    console.log(req.body.buyer_phone)
-    twilioClient.messages
-    .create({
-      body: `Congrats ${req.body.buyer_name}! \n You had the highest bid! `,
-      from: '+12012672107',
-      to: `+1${req.body.buyer_phone}`
-    }).then(message => {
+//   products.delete(condition, function (result) {
+//     console.log("message should send now")
+//     console.log(req.body.buyer_phone)
+//     twilioClient.messages
+//     .create({
+//       body: `Congrats ${req.body.buyer_name}! \n You had the highest bid! `,
+//       from: '+12012672107',
+//       to: `+1${req.body.buyer_phone}`
+//     }).then(message => {
       
-      products.all(function (data) {
-        console.log(data)
-        const products = data;
-        for (let index = 0; index < products.length; index++) {
-          const aProduct = products[index];
-          console.log(aProduct)
-          console.log(req.params.id)
-          if (aProduct.product_id == req.params.id) {
-            twilioClient.messages
-              .create({
-                body: `Hi ${aProduct.seller_name}, \n ${req.body.buyer_name} bought ${aProduct.product_name}!`,
-                from: '+12012672107',
-                to: `+1${aProduct.seller_phone}`
-              }).then(message =>{
-                console.log(message)
-              })
-          }
-        }
-      });
-    });
-    if (result.affectedRows == 0) {
-      // If no rows were changed, then the ID must not exist, so 404
-      return res.status(404).end();
-    } else {
-      res.status(200).end();
-    }
-  });
-});
+//       products.all(function (data) {
+//         console.log(data)
+//         const products = data;
+//         for (let index = 0; index < products.length; index++) {
+//           const aProduct = products[index];
+//           console.log(aProduct)
+//           console.log(req.params.id)
+//           if (aProduct.product_id == req.params.id) {
+//             twilioClient.messages
+//               .create({
+//                 body: `Hi ${aProduct.seller_name}, \n ${req.body.buyer_name} bought ${aProduct.product_name}!`,
+//                 from: '+12012672107',
+//                 to: `+1${aProduct.seller_phone}`
+//               }).then(message =>{
+//                 console.log(message)
+//               })
+//           }
+//         }
+//       });
+//     });
+//     if (result.affectedRows == 0) {
+//       // If no rows were changed, then the ID must not exist, so 404
+//       return res.status(404).end();
+//     } else {
+//       res.status(200).end();
+//     }
+//   });
+// });
+router.delete("/test_products_api/:id", function (req, res) {
+  const { id } = req.params;
+  products.find(id, function (data) {
+    const aProduct = data[0];
+    twilioClient.messages
+      .create({
+        body: `Hi ${aProduct.seller_name}, \n${aProduct.buyer_name} bought the ${aProduct.product_name} for $${aProduct.highest_bid}!`,
+        from: '+12012672107',
+        to: `+1${aProduct.seller_phone}`
+      }).then(message => {
+        console.log("Seller Message")
+        console.log(message)
+        // res.send(message)
+        return twilioClient.messages
+          .create({
+            body: `Congrats ${aProduct.buyer_name}! \nYou had the highest bid! `,
+            from: '+12012672107',
+            to: `+1${aProduct.buyer_phone}`
+          });
+      }).then(message => {
+        console.log("buyer Message")
+        console.log(message)
+        // res.send(message)
+        products.delete(id, function (result) {
+          res.send(result)
+        })
+      }).catch(err => {
+        res.send(err)
+      })
+  })
+})
 
 module.exports = router;
 
