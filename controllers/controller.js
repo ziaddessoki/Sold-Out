@@ -12,7 +12,7 @@ const twilioClient = new twilio(accountSid, authToken);
 // HOME PAGE
 
 
-app.use(express.static('public'))
+// app.use(express.static('public'))
 
 router.get("/", function (req, res) {
   res.sendFile(path.join(__dirname, "/../public/index.html"));
