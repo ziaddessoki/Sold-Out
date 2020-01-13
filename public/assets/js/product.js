@@ -28,24 +28,7 @@ $(document).ready(function () {
                 .val()
                 .trim()
         };
-        // console.log(newProduct)
-        // // Send the POST request.
-        // $.ajax("/send_sms", {
-        //     type: "POST",
-        //     data: newProduct.seller_phone,
-        //     dataType: "json",
-        //     contentType: "application/json"
-        // }).then(function (data) {
-           
-        //     $("#addProduct [name=productName] ").val("");
-        //     $("#addProduct [name=productDescription]").val("");
-        //     $("#addProduct [name=productImage]").val("");
-        //     $("#addProduct [name=minBid]").val("");
-        //     $("#addProduct [name=sellerName]").val("");
-        //     $("#addProduct [name=sellerPhone]").val("");
-        //     $("#addProduct [name=bidLength]").val("");
-        //     // location.reload();
-        // })
+      
         $.ajax("/products_api", {
             type: "POST",
             data: JSON.stringify(newProduct),
