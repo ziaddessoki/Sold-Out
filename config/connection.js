@@ -7,11 +7,11 @@ if(process.env.JAWSDB_URL){
   connection = mysql.createConnection(process.env.JAWSDB_URL);
 }else{
   connection = mysql.createConnection({
-    host: "localhost",
+    host: "fugfonv8odxxolj8.cbetxkdyhwsb.us-east-1.rds.amazonaws.com",
     port: 3306,
-    user: "root",
-    password: "password",
-    database: "ebay_db"
+    user: "qfl1e9xj4sxkgk8m",
+    password: "cq82p28tbdj9hce1",
+    database: "e33rss6hepu5ezt5"
   });  
 }
 
