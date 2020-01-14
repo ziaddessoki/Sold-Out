@@ -88,7 +88,7 @@ body{
     font-size: smaller;
 }
 .footer {
-    position: fixed;
+    /* position: fixed; */
     left: 0;
     bottom: 0%;
     width: 100%;
@@ -96,6 +96,7 @@ body{
     color: gray;
     text-align: center;
     font-size: smaller;
+    
   }
 
 /* Seller page */
@@ -123,4 +124,8 @@ body{
     text-align: center;
     height: 30px;
     font-family: 'Comfortaa', cursive;
+}
+
+#logos{
+    margin:8px;
 }
