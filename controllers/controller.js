@@ -153,7 +153,7 @@ router.put("/products_api/:id", function (req, res) {
 //   });
 // });
 router.delete("/test_products_api/:id", function (req, res) {
-  var  id  = req.params;
+  const { id } = req.params;
   products.find(id, function (data) {
     const aProduct = data[0];
     twilioClient.messages
