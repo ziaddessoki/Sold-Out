@@ -193,7 +193,6 @@ router.delete("/test_products_api/:id", function (req, res) {
           res.status(200).end();
         }
       })
-
 })
 
 module.exports = router;
