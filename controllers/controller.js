@@ -154,8 +154,10 @@ router.put("/products_api/:id", function (req, res) {
 // });
 router.delete("/test_products_api/:id", function (req, res) {
   const { id } = req.params;
+  console.log(id)
   products.find(id, function (data) {
     const aProduct = data[0];
+    console.log(aProduct)
     twilioClient.messages
       .create({
         body: `Hi ${aProduct.seller_name}, \n${aProduct.buyer_name} bought the ${aProduct.product_name} for $${aProduct.highest_bid}!`,
