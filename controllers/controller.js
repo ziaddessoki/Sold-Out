@@ -173,17 +173,27 @@ router.delete("/test_products_api/:id", function (req, res) {
             from: '+12012672107',
             to: `+1${aProduct.buyer_phone}`
           });
-      }).then(message => {
-        console.log("buyer Message")
-        console.log(message)
-        // res.send(message)
-        products.delete(id, function (result) {
-          res.send(result)
-        })
+      // }).then(message => {
+      //   console.log("buyer Message")
+      //   console.log(message)
+      //   // res.send(message)
+      //   products.delete(id, function (result) {
+      //     res.send(result)
+      //   })
       }).catch(err => {
         res.send(err)
       })
   })
+  products.delete(id, function (result) {
+        res.send(result)
+        if (result.affectedRows == 0) {
+          // If no rows were changed, then the ID must not exist, so 404
+          return res.status(404).end();
+        } else {
+          res.status(200).end();
+        }
+      })
+
 })
 
 module.exports = router;
