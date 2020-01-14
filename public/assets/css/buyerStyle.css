@@ -106,6 +106,7 @@ body{
     padding-bottom: 4%;
     margin-top: 20px;
     border-radius: 20px;
+    font-family: 'Comfortaa', cursive;
 }
 
 #submitBtn{
@@ -120,5 +121,6 @@ body{
     margin: 5px;
     border-radius:10px ;
     text-align: center;
-    height: 100px;
+    height: 30px;
+    font-family: 'Comfortaa', cursive;
 }
