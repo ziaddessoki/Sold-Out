@@ -151,6 +151,7 @@ function setCountDown(x, y, q) {
             var cardBtn = $('[data-id='+ y +']')
             $(cardBtn).removeClass('btn-primary').addClass('btn-danger');
         }
+        
 
         if (distance < 0) {
             // clearInterval(x);
