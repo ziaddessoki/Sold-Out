@@ -35,6 +35,7 @@ Looking to Buy?
 - CSS
 - Javascript
 - JQuery
+- MySQL
 - APIs –  Twilio
 - Heroku
  
