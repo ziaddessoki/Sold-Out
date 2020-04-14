@@ -9,14 +9,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Ericv0801/ebay_proj2.git"
+    "url": "git+https://github.com/ziaddessoki/Sold-Out.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Ericv0801/ebay_proj2/issues"
+    "url": "https://github.com/ziaddessoki/Sold-Out/issues"
   },
-  "homepage": "https://github.com/Ericv0801/ebay_proj2#readme",
+  "homepage": "https://github.com/ziaddessoki/Sold-Out#readme",
   "dependencies": {
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
